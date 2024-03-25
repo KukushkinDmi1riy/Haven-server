@@ -15,6 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 
 const DATABASE = process.env.DATABASE;
+const PORT = process.env.PORT || 8081;
 
 //db
 mongoose.set('strictQuery', false);
@@ -32,6 +33,6 @@ app.use(cors());
 app.use('/api', authRoutes);
 app.use('/api', adRoutes);
 
-app.listen(8081, () => {
-  console.log('Server on port 8081');
+app.listen(PORT, () => {
+  console.log(`Server on port ${PORT}`);
 });

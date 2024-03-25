@@ -1,0 +1,13 @@
+- name: create env file
+  run: |
+         touch .env
+         echo DATABASE=${{ secrets.DATABASE }} >> .env
+         echo AWSPassword=${{ secrets.AWSPassword }} >> .env
+         echo user_name=${{ secrets.user_name }} >> .env
+         echo URl=${{ secrets.URl }} >> .env
+         echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env
+         echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env
+         echo GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} >> .env
+         echo JWT_SECRETS=${{ secrets.JWT_SECRETS }} >> .env
+
+

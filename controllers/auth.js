@@ -8,11 +8,11 @@ import validator from 'email-validator';
 import Ad from '../models/ad.js';
 
 const tokenAndUserResponse = (req, res, user) => {
-  const token = jwt.sign({ _id: user._id }, config.JWT_SECRETS, {
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRETS, {
     expiresIn: '1h',
   });
 
-  const refreshToken = jwt.sign({ _id: user._id }, config.JWT_SECRETS, {
+  const refreshToken = jwt.sign({ _id: user._id }, process.env.JWT_SECRETS, {
     expiresIn: '7d',
   });
 
@@ -55,7 +55,7 @@ export const preRegister = async (req, res) => {
       return res.json({ error: 'User is taken' });
     }
 
-    const token = jwt.sign({ email, password }, config.JWT_SECRETS, { expiresIn: '1h' });
+    const token = jwt.sign({ email, password }, process.env.JWT_SECRETS, { expiresIn: '1h' });
 
     config.AWSSES.sendEmail(
       emailTemplate(
@@ -85,7 +85,7 @@ export const preRegister = async (req, res) => {
 
 export const register = async (req, res) => {
   try {
-    const { email, password } = jwt.verify(req.body.token, config.JWT_SECRETS);
+    const { email, password } = jwt.verify(req.body.token, process.env.JWT_SECRETS);
 
     const hashedPassword = await hashPassword(password);
 
@@ -140,7 +140,7 @@ export const forgotPassword = async (req, res) => {
     } else {
       const resetCode = nanoid();
 
-      const token = jwt.sign({ resetCode }, config.JWT_SECRETS, {
+      const token = jwt.sign({ resetCode }, process.env.JWT_SECRETS, {
         expiresIn: '60m',
       });
       // save to user db
@@ -175,7 +175,7 @@ export const forgotPassword = async (req, res) => {
 
 export const accessAccount = async (req, res) => {
   try {
-    const { resetCode } = jwt.verify(req.body.resetCode, config.JWT_SECRETS);
+    const { resetCode } = jwt.verify(req.body.resetCode, process.env.JWT_SECRETS);
     const user = await User.findOneAndUpdate({ resetCode }, { resetCode: '' });
     console.log(user, 'user');
     tokenAndUserResponse(req, res, user);
@@ -187,7 +187,7 @@ export const accessAccount = async (req, res) => {
 
 export const refreshToken = async (req, res) => {
   try {
-    const { _id } = jwt.verify(req.headers.refresh_token, config.JWT_SECRETS);
+    const { _id } = jwt.verify(req.headers.refresh_token, process.env.JWT_SECRETS);
 
     const user = await User.findById(_id);
 

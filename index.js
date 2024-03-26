@@ -9,7 +9,7 @@ import authRoutes from './routes/auth.js';
 import adRoutes from './routes/ad.js';
 
 // if (process.env.NODE_ENV == 'dev') {
-  dotenv.config();
+//   dotenv.config();
 // }
 
 const app = express();

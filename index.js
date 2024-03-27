@@ -9,9 +9,7 @@ import adRoutes from './routes/ad.js';
 
 const app = express();
 
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
-}
+dotenv.config();
 
 console.log(process.env.DATABASE, 'DB connect');
 

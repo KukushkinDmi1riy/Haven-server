@@ -4,15 +4,13 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-// import { DATABASE } from './config.js';
 import authRoutes from './routes/auth.js';
 import adRoutes from './routes/ad.js';
 
-// if (process.env.NODE_ENV == 'dev') {
-//   dotenv.config();
-// }
-
 const app = express();
+dotenv.config();
+
+console.log(process.env.DATABASE, 'DB connect');
 
 const DATABASE = process.env.DATABASE;
 const PORT = process.env.PORT || 8081;

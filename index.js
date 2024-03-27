@@ -8,7 +8,10 @@ import authRoutes from './routes/auth.js';
 import adRoutes from './routes/ad.js';
 
 const app = express();
-dotenv.config();
+
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 console.log(process.env.DATABASE, 'DB connect');
 

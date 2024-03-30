@@ -21,7 +21,7 @@ mongoose.set('strictQuery', false);
 mongoose
   .connect(DATABASE)
   .then(() => console.log('DB connected'))
-  .catch((err) => console.log('DB error'));
+  .catch((err) => console.log('DB connection error'));
 
 //middlewares
 app.use(express.json({ limit: '10mb' }));

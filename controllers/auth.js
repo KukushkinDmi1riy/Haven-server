@@ -126,6 +126,7 @@ export const login = async (req, res) => {
 
     tokenAndUserResponse(req, res, user);
   } catch (error) {
+    res.status(400);
     return res.json({ error: 'Something went wrong. Try again' });
   }
 };
